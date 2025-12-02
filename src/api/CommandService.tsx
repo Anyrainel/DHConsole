@@ -2,9 +2,14 @@ import MuipService from './MuipService';
 import { Character, Relic, MAIN_AFFIXES, SUB_AFFIXES } from './CharacterInfo';
 import { Prop } from './PropInfo';
 
+export interface MissionData {
+  missions: Record<number, number[]>;
+  stuckSubMissionIds: number[];
+}
+
 class CommandService {
   static readonly languageMap: Record<string, string> = {
-    'zh_CN': 'CHS',
+    'zh_CN': 'CN',
     'zh_HK': 'CHT',
     'en': 'EN',
     'ja': 'JP',
@@ -18,6 +23,7 @@ class CommandService {
     'vi': 'VI',
   };
   static playerUid: number = 0;
+  static recentCommands: string[] = [];
 
   static setPlayerUid(playerUid: number) {
     this.playerUid = playerUid;
@@ -26,6 +32,7 @@ class CommandService {
   static async executeCommand(command: string): Promise<string> {
     try {
       console.log('Executing command:', command);
+      this.recentCommands = [command, ...this.recentCommands].slice(0, 20);
       const response = await MuipService.executeCommand(command, this.playerUid);
       if (response.code !== 0) {
         throw new Error(`Command failed: ${response.message}`);
@@ -35,6 +42,10 @@ class CommandService {
       console.error(`Error executing command: ${command}`, error);
       throw error;
     }
+  }
+
+  static getRecentCommands(): string[] {
+    return this.recentCommands;
   }
 
   static async loadAvatarGameText(lang: string): Promise<Record<number, string>> {
@@ -127,7 +138,7 @@ class CommandService {
   }
 
   static async getCharacterRelicRecommend(characterId: number): Promise<Record<number, Relic>> {
-    const command = `build recommend ${characterId}`;
+    const command = `buildchar recommend ${characterId}`;
     const result = await this.executeCommand(command);
     return this.parseRelicRecommend(result);
   }
@@ -138,14 +149,14 @@ class CommandService {
     }
   }
 
-  static async getPlayerInfo(): Promise<{ level: number, gender: number }> {
+  static async getPlayerInfo(): Promise<{ level: number, gender: number, path: number }> {
     const command = `fetch player`;
     const result = await this.executeCommand(command);
-    const match = result.match(/level: (\d+), gender: (\d+)/);
-    if (!match || match.length < 3) {
+    const match = result.match(/level: (\d+), gender: (\d+), path: (\d+)/);
+    if (!match || match.length < 4) {
       throw new Error('Failed to parse player info');
     }
-    return { level: parseInt(match[1], 10), gender: parseInt(match[2], 10) };
+    return { level: parseInt(match[1], 10), gender: parseInt(match[2], 10), path: parseInt(match[3], 10) };
   }
 
   static async setPlayerLevel(level: number): Promise<void> {
@@ -158,6 +169,11 @@ class CommandService {
       throw new Error('Invalid gender');
     }
     const command = `hero gender ${gender}`;
+    await this.executeCommand(command);
+  }
+
+  static async setPlayerPath(pathId: number): Promise<void> {
+    const command = `hero type ${pathId}`;
     await this.executeCommand(command);
   }
 
@@ -218,7 +234,7 @@ class CommandService {
     await this.executeCommand(command);
   }
 
-  static async getCurrentMissions(): Promise<Record<number, number[]>> {
+  static async getCurrentMissions(): Promise<MissionData> {
     const command = `mission running`;
     const result = await this.executeCommand(command);
     return this.parseMissionLists(result);
@@ -263,6 +279,83 @@ class CommandService {
     const command = `remove equipment`;
     const result = await this.executeCommand(command);
     return result;
+  }
+
+  static async sceneForward(distance: number): Promise<void> {
+    const command = `scene forward ${distance}`;
+    await this.executeCommand(command);
+  }
+
+  static async sceneUnstuck(): Promise<void> {
+    const command = `unstuck`;
+    await this.executeCommand(command);
+  }
+
+  static async setLineupMp(count: number): Promise<void> {
+    const command = `lineup mp ${count}`;
+    await this.executeCommand(command);
+  }
+
+  static async healLineup(): Promise<void> {
+    const command = `lineup heal`;
+    await this.executeCommand(command);
+  }
+
+  static async claimPromotionRewards(): Promise<void> {
+    const command = `claim promotion`;
+    await this.executeCommand(command);
+  }
+
+  // Rogue (Simulated Universe) Commands
+  static async rogueMoney(amount: number): Promise<void> {
+    const command = `rogue money ${amount}`;
+    await this.executeCommand(command);
+  }
+
+  static async rogueBuff(buffId: number): Promise<void> {
+    const command = `rogue buff ${buffId}`;
+    await this.executeCommand(command);
+  }
+
+  static async rogueMiracle(miracleId: number): Promise<void> {
+    const command = `rogue miracle ${miracleId}`;
+    await this.executeCommand(command);
+  }
+
+  static async rogueRoll(): Promise<void> {
+    const command = `rogue roll`;
+    await this.executeCommand(command);
+  }
+
+  static async rogueEnhance(): Promise<void> {
+    const command = `rogue enhance`;
+    await this.executeCommand(command);
+  }
+
+  // Grid (Currency Wars) Commands
+  static async gridGold(amount: number): Promise<void> {
+    const command = `grid gold ${amount}`;
+    await this.executeCommand(command);
+  }
+
+  static async gridRole(roleId: number, tier: number): Promise<void> {
+    const command = `grid role ${roleId} ${tier}`;
+    await this.executeCommand(command);
+  }
+
+  static async gridEquip(equipId: number): Promise<void> {
+    const command = `grid equip ${equipId}`;
+    await this.executeCommand(command);
+  }
+
+  static async gridOrb(orbId: number): Promise<void> {
+    const command = `grid orb ${orbId}`;
+    await this.executeCommand(command);
+  }
+
+  static async gridConsumable(consumableId: number): Promise<void> {
+    const command = `grid consumable ${consumableId}`;
+    await this.executeCommand(command);
   }
 
   private static parseGameText(response: string): Record<number, string> {
@@ -400,25 +493,43 @@ class CommandService {
     return data;
   }
 
-  private static parseMissionLists(response: string): Record<number, number[]> {
+  private static parseMissionLists(response: string): MissionData {
     const lines = response.split('\n');
-    const data: Record<number, number[]> = {};
-    let currentMainId = null;
-    for (const line of lines.slice(1)) {
-      if (line.includes('Main task')) {
-        const mainTaskMatch = line.match(/Main task (\d+).*/);
-        if (mainTaskMatch && mainTaskMatch[1]) {
-          currentMainId = parseInt(mainTaskMatch[1], 10);
-          data[currentMainId] = [];
-        }
-      } else if (line.includes('Possibly stuck tasks')) {
-        break;
-      } else if (currentMainId) {
-        const subIds = line.trim().split('、').map(Number);
-        data[currentMainId].push(...subIds);
+    const missions: Record<number, number[]> = {};
+    const stuckSubMissionIds: number[] = [];
+    let currentMainId: number | null = null;
+    let parsingStuck = false;
+
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (!trimmed) continue;
+
+      // Check for main task line: ends with digits + fullwidth colon
+      const mainTaskMatch = trimmed.match(/(\d+)：$/);
+      if (mainTaskMatch && mainTaskMatch[1]) {
+        currentMainId = parseInt(mainTaskMatch[1], 10);
+        missions[currentMainId] = [];
+        parsingStuck = false;
+        continue;
+      }
+
+      // Check for "Possibly stuck tasks" line: no digits
+      if (!/\d/.test(trimmed)) {
+        parsingStuck = true;
+        currentMainId = null;
+        continue;
+      }
+
+      const ids = trimmed.split('、').map(s => parseInt(s.trim(), 10)).filter(n => !isNaN(n));
+
+      if (parsingStuck) {
+        stuckSubMissionIds.push(...ids);
+      } else if (currentMainId !== null) {
+        missions[currentMainId].push(...ids);
       }
     }
-    return data;
+
+    return { missions, stuckSubMissionIds };
   }
 
   static parsePropList(response: string): Prop[] {

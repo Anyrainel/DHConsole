@@ -30,8 +30,16 @@
             "name": "Name",
             "level": "Level",
             "superimposition": "Superimposition",
+            "actions": {
+                "recommend": "Get Recommended Light Cone"
+            },
+            "noLightCone": "No Light Cone",
             "errors": {
-                "saveFailed": "Failed to save light cone info"
+                "saveFailed": "Failed to save light cone info",
+                "recommendFailed": "Failed to find recommended Light Cone"
+            },
+            "messages": {
+                "recommendSuccess": "Recommended Light Cone applied"
             }
         },
         "relic": {
@@ -116,7 +124,18 @@
             "gender": "Gender",
             "update": "Update",
             "male": "Male",
-            "female": "Female"
+            "female": "Female",
+            "path": "Path"
+        },
+        "paths": {
+            "8001": "Destruction (Male)",
+            "8002": "Destruction (Female)",
+            "8003": "Preservation (Male)",
+            "8004": "Preservation (Female)",
+            "8005": "Harmony (Male)",
+            "8006": "Harmony (Female)",
+            "8007": "Remembrance (Male)",
+            "8008": "Remembrance (Female)"
         },
         "controls": {
             "title": "Account Controls",
@@ -133,7 +152,8 @@
                 "characterTalent": "Character Talent",
                 "mission": "Mission",
                 "tutorial": "Tutorial",
-                "rogue": "Simulated Universe"
+                "rogue": "Simulated Universe",
+                "promotionRewards": "Promotion Rewards"
             }
         },
         "messages": {
@@ -143,6 +163,8 @@
             "levelError": "Failed to update level",
             "genderSuccess": "Gender updated successfully",
             "genderError": "Failed to update gender",
+            "pathSuccess": "Path switched successfully",
+            "pathError": "Failed to switch path",
             "actionError": "Action failed",
             "unlockSuccess": {
                 "characters": "All characters unlocked",
@@ -154,7 +176,8 @@
                 "characterTalent": "All characters set to max talent",
                 "mission": "All missions unlocked",
                 "tutorial": "All tutorials unlocked",
-                "rogue": "All simulated universe missions unlocked"
+                "rogue": "All simulated universe missions unlocked",
+                "promotionRewards": "All promotion rewards claimed"
             }
         }
     },
@@ -163,7 +186,8 @@
         "input": "Command Input",
         "placeholder": "Enter command",
         "run": "Run",
-        "output": "[Command Output]"
+        "output": "[Command Output]",
+        "recent": "Recent Commands"
     },
     "inventory": {
         "actions": {
@@ -211,7 +235,32 @@
             "showUnnamedMissions": "Show unnamed missions",
             "searchPlaceholder": "Search missions...",
             "main": "main",
-            "sub": "sub"
+            "sub": "sub",
+            "stuck": "This task may be stuck",
+            "autoRefresh": "Auto Refresh"
+        }
+    },
+    "gamemodes": {
+        "actions": {
+            "set": "Set",
+            "add": "Add"
+        },
+        "rogue": {
+            "title": "Simulated Universe",
+            "money": "Cosmic Fragment",
+            "buff": "Buff ID",
+            "miracle": "Miracle ID",
+            "roll": "Reroll",
+            "enhance": "Enhance"
+        },
+        "grid": {
+            "title": "Aetherium Wars",
+            "gold": "Aetherium",
+            "roleId": "Role ID",
+            "roleTier": "Tier",
+            "equip": "Equipment ID",
+            "orb": "Orb ID",
+            "consumable": "Consumable ID"
         }
     },
     "navigation": {
@@ -220,6 +269,7 @@
         "segments": {
             "characters": "Characters",
             "missions": "Missions",
+            "gamemodes": "Game Modes",
             "inventory": "Inventory",
             "scene": "Scene",
             "account": "Account",
@@ -229,18 +279,37 @@
     "scene": {
         "sections": {
             "propsNearMe": "Props Near Me",
-            "recentChanges": "Recent Changes"
+            "recentChanges": "Recent Changes",
+            "navigation": "Navigation",
+            "lineup": "Lineup"
         },
         "labels": {
             "state": "State",
-            "showUnlockedProps": "Show already unlocked props"
+            "showUnlockedProps": "Show already unlocked props",
+            "distance": "Distance",
+            "mp": "Technique Points",
+            "autoRefresh": "Auto Refresh"
+        },
+        "actions": {
+            "forward": "Forward",
+            "unstuck": "Unstuck",
+            "setMp": "Set MP",
+            "heal": "Heal Lineup"
         },
         "messages": {
             "saveSuccess": "Prop state saved successfully",
             "saveError": "Failed to save prop state",
             "undoSuccess": "Prop state reverted successfully",
             "undoError": "Failed to revert prop state",
-            "noStateSelected": "Please select a state to save"
+            "noStateSelected": "Please select a state to save",
+            "forwardSuccess": "Moved forward successfully",
+            "forwardError": "Failed to move forward",
+            "unstuckSuccess": "Unstuck command sent",
+            "unstuckError": "Failed to send unstuck command",
+            "setMpSuccess": "MP set successfully",
+            "setMpError": "Failed to set MP",
+            "healSuccess": "Lineup healed successfully",
+            "healError": "Failed to heal lineup"
         }
     },
     "welcome": {
@@ -268,7 +337,7 @@
             "title": "If you are a first time user",
             "step0": {
                 "title": "Step 0: Setup DanhengServer",
-                "description": "If you are not sure how to set up DanhengServer, refer to"
+                "description": "(Outdated) If you are not sure how to set up DanhengServer, refer to"
             },
             "step1": {
                 "title": "Step 1: Launch Required Programs",

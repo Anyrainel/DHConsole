@@ -29,8 +29,16 @@
             "name": "名前",
             "level": "レベル",
             "superimposition": "重ね合わせ",
+            "actions": {
+                "recommend": "Get Recommended Light Cone"
+            },
+            "noLightCone": "No Light Cone",
             "errors": {
-                "saveFailed": "光円錐の情報の保存に失敗しました"
+                "saveFailed": "光円錐の情報の保存に失敗しました",
+                "recommendFailed": "Failed to find recommended Light Cone"
+            },
+            "messages": {
+                "recommendSuccess": "Recommended Light Cone applied"
             }
         },
         "relic": {
@@ -115,7 +123,18 @@
             "gender": "性別",
             "update": "更新",
             "male": "男性",
-            "female": "女性"
+            "female": "女性",
+            "path": "命途"
+        },
+        "paths": {
+            "8001": "壊滅(男)",
+            "8002": "壊滅(女)",
+            "8003": "存護(男)",
+            "8004": "存護(女)",
+            "8005": "調和(男)",
+            "8006": "調和(女)",
+            "8007": "記憶(男)",
+            "8008": "記憶(女)"
         },
         "controls": {
             "title": "アカウントコントロール",
@@ -132,7 +151,8 @@
                 "characterTalent": "キャラクタースキル",
                 "mission": "ミッション",
                 "tutorial": "チュートリアル",
-                "rogue": "シミュレーションユニバース"
+                "rogue": "シミュレーションユニバース",
+                "promotionRewards": "昇格報酬"
             }
         },
         "messages": {
@@ -142,6 +162,8 @@
             "levelError": "レベルの更新に失敗しました",
             "genderSuccess": "性別が正常に更新されました",
             "genderError": "性別の更新に失敗しました",
+            "pathSuccess": "命途の切り替えに成功しました",
+            "pathError": "命途の切り替えに失敗しました",
             "actionError": "操作に失敗しました",
             "unlockSuccess": {
                 "characters": "すべてのキャラクターがアンロックされました",
@@ -153,7 +175,8 @@
                 "characterTalent": "すべてのキャラクターが最大スキルに設定されました",
                 "mission": "すべてのミッションがアンロックされました",
                 "tutorial": "すべてのチュートリアルがアンロックされました",
-                "rogue": "すべてのシミュレーションユニバースミッションがアンロックされました"
+                "rogue": "すべてのシミュレーションユニバースミッションがアンロックされました",
+                "promotionRewards": "すべての昇格報酬を獲得しました"
             }
         }
     },
@@ -162,7 +185,8 @@
         "input": "コマンド入力",
         "placeholder": "コマンドを入力",
         "run": "実行",
-        "output": "[コマンド出力]"
+        "output": "[コマンド出力]",
+        "recent": "最近のコマンド"
     },
     "inventory": {
         "actions": {
@@ -210,7 +234,9 @@
             "showUnnamedMissions": "名前のない任務を表示",
             "searchPlaceholder": "任務を検索...",
             "main": "メイン",
-            "sub": "サブ"
+            "sub": "サブ",
+            "stuck": "このタスクはスタックしている可能性があります",
+            "autoRefresh": "自動更新"
         }
     },
     "navigation": {
@@ -228,18 +254,37 @@
     "scene": {
         "sections": {
             "propsNearMe": "近くのプロップ",
-            "recentChanges": "最近の変更"
+            "recentChanges": "最近の変更",
+            "navigation": "ナビゲーション",
+            "lineup": "編成"
         },
         "labels": {
             "state": "状態",
-            "showUnlockedProps": "アンロック済みのプロップを表示"
+            "showUnlockedProps": "アンロック済みのプロップを表示",
+            "distance": "距離",
+            "mp": "秘技ポイント",
+            "autoRefresh": "自動リフレッシュ"
+        },
+        "actions": {
+            "forward": "前進",
+            "unstuck": "スタック解除",
+            "setMp": "秘技Pt設定",
+            "heal": "編成回復"
         },
         "messages": {
             "saveSuccess": "プロップの状態を保存しました",
             "saveError": "プロップの状態の保存に失敗しました",
             "undoSuccess": "プロップの状態を元に戻しました",
             "undoError": "プロップの状態の復元に失敗しました",
-            "noStateSelected": "保存する状態を選択してください"
+            "noStateSelected": "保存する状態を選択してください",
+            "forwardSuccess": "前進しました",
+            "forwardError": "前進に失敗しました",
+            "unstuckSuccess": "スタック解除コマンドを送信しました",
+            "unstuckError": "スタック解除コマンドの送信に失敗しました",
+            "setMpSuccess": "秘技ポイントを設定しました",
+            "setMpError": "秘技ポイントの設定に失敗しました",
+            "healSuccess": "編成を回復しました",
+            "healError": "編成の回復に失敗しました"
         }
     },
     "welcome": {

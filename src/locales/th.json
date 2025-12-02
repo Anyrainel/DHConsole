@@ -29,8 +29,16 @@
             "name": "ชื่อ",
             "level": "ระดับ",
             "superimposition": "ซ้อนทับ",
+            "actions": {
+                "recommend": "Get Recommended Light Cone"
+            },
+            "noLightCone": "No Light Cone",
             "errors": {
-                "saveFailed": "ไม่สามารถบันทึกข้อมูลโคนแสงได้"
+                "saveFailed": "ไม่สามารถบันทึกข้อมูลโคนแสงได้",
+                "recommendFailed": "Failed to find recommended Light Cone"
+            },
+            "messages": {
+                "recommendSuccess": "Recommended Light Cone applied"
             }
         },
         "relic": {
@@ -115,7 +123,18 @@
             "gender": "เพศ",
             "update": "อัปเดต",
             "male": "ชาย",
-            "female": "หญิง"
+            "female": "หญิง",
+            "path": "เส้นทาง"
+        },
+        "paths": {
+            "8001": "การทำลายล้าง (ชาย)",
+            "8002": "การทำลายล้าง (หญิง)",
+            "8003": "การอนุรักษ์ (ชาย)",
+            "8004": "การอนุรักษ์ (หญิง)",
+            "8005": "การประสาน (ชาย)",
+            "8006": "การประสาน (หญิง)",
+            "8007": "ความทรงจำ (ชาย)",
+            "8008": "ความทรงจำ (หญิง)"
         },
         "controls": {
             "title": "การควบคุมบัญชี",
@@ -132,7 +151,8 @@
                 "characterTalent": "พรสวรรค์ตัวละคร",
                 "mission": "ภารกิจ",
                 "tutorial": "การสอน",
-                "rogue": "จักรวาลจำลอง"
+                "rogue": "จักรวาลจำลอง",
+                "promotionRewards": "รางวัลเลื่อนขั้น"
             }
         },
         "messages": {
@@ -142,6 +162,8 @@
             "levelError": "การอัปเดตระดับล้มเหลว",
             "genderSuccess": "อัปเดตเพศสำเร็จ",
             "genderError": "การอัปเดตเพศล้มเหลว",
+            "pathSuccess": "เปลี่ยนเส้นทางสำเร็จ",
+            "pathError": "ไม่สามารถเปลี่ยนเส้นทางได้",
             "actionError": "การดำเนินการล้มเหลว",
             "unlockSuccess": {
                 "characters": "ปลดล็อกตัวละครทั้งหมดแล้ว",
@@ -153,7 +175,8 @@
                 "characterTalent": "ตั้งค่าพรสวรรค์ตัวละครทั้งหมดเป็นสูงสุดแล้ว",
                 "mission": "ปลดล็อกภารกิจทั้งหมดแล้ว",
                 "tutorial": "ปลดล็อกการสอนทั้งหมดแล้ว",
-                "rogue": "ปลดล็อกภารกิจจักรวาลจำลองทั้งหมดแล้ว"
+                "rogue": "ปลดล็อกภารกิจจักรวาลจำลองทั้งหมดแล้ว",
+                "promotionRewards": "รับรางวัลเลื่อนขั้นทั้งหมดแล้ว"
             }
         }
     },
@@ -162,7 +185,8 @@
         "input": "ป้อนคำสั่ง",
         "placeholder": "ป้อนคำสั่ง",
         "run": "รัน",
-        "output": "[ผลลัพธ์คำสั่ง]"
+        "output": "[ผลลัพธ์คำสั่ง]",
+        "recent": "คำสั่งล่าสุด"
     },
     "inventory": {
         "actions": {
@@ -210,7 +234,9 @@
             "showUnnamedMissions": "แสดงภารกิจที่ไม่มีชื่อ",
             "searchPlaceholder": "ค้นหาภารกิจ...",
             "main": "หลัก",
-            "sub": "รอง"
+            "sub": "รอง",
+            "stuck": "งานนี้อาจติดขัด",
+            "autoRefresh": "รีเฟรชอัตโนมัติ"
         }
     },
     "navigation": {
@@ -228,18 +254,37 @@
     "scene": {
         "sections": {
             "propsNearMe": "วัตถุใกล้เคียง",
-            "recentChanges": "การเปลี่ยนแปลงล่าสุด"
+            "recentChanges": "การเปลี่ยนแปลงล่าสุด",
+            "navigation": "การนำทาง",
+            "lineup": "ทีม"
         },
         "labels": {
             "state": "สถานะ",
-            "showUnlockedProps": "แสดงวัตถุที่ปลดล็อคแล้ว"
+            "showUnlockedProps": "แสดงวัตถุที่ปลดล็อคแล้ว",
+            "distance": "ระยะทาง",
+            "mp": "คะแนนเทคนิค",
+            "autoRefresh": "รีเฟรชอัตโนมัติ"
+        },
+        "actions": {
+            "forward": "ไปข้างหน้า",
+            "unstuck": "แก้ติด",
+            "setMp": "ตั้งค่า TP",
+            "heal": "รักษาทีม"
         },
         "messages": {
             "saveSuccess": "บันทึกสถานะวัตถุสำเร็จ",
             "saveError": "ไม่สามารถบันทึกสถานะวัตถุ",
             "undoSuccess": "คืนค่าสถานะวัตถุสำเร็จ",
             "undoError": "ไม่สามารถคืนค่าสถานะวัตถุ",
-            "noStateSelected": "กรุณาเลือกสถานะที่ต้องการบันทึก"
+            "noStateSelected": "กรุณาเลือกสถานะที่ต้องการบันทึก",
+            "forwardSuccess": "เคลื่อนที่ไปข้างหน้าสำเร็จ",
+            "forwardError": "ล้มเหลวในการเคลื่อนที่ไปข้างหน้า",
+            "unstuckSuccess": "ส่งคำสั่งแก้ติดแล้ว",
+            "unstuckError": "ส่งคำสั่งแก้ติดล้มเหลว",
+            "setMpSuccess": "ตั้งค่า TP สำเร็จ",
+            "setMpError": "ตั้งค่า TP ล้มเหลว",
+            "healSuccess": "รักษาทีมสำเร็จ",
+            "healError": "รักษาทีมล้มเหลว"
         }
     },
     "welcome": {

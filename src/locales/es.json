@@ -29,8 +29,16 @@
             "name": "Nombre",
             "level": "Nivel",
             "superimposition": "Superposición",
+            "actions": {
+                "recommend": "Get Recommended Light Cone"
+            },
+            "noLightCone": "No Light Cone",
             "errors": {
-                "saveFailed": "No se pudo guardar la información del Cono de Luz"
+                "saveFailed": "No se pudo guardar la información del Cono de Luz",
+                "recommendFailed": "Failed to find recommended Light Cone"
+            },
+            "messages": {
+                "recommendSuccess": "Recommended Light Cone applied"
             }
         },
         "relic": {
@@ -115,7 +123,18 @@
             "gender": "Género",
             "update": "Actualizar",
             "male": "Masculino",
-            "female": "Femenino"
+            "female": "Femenino",
+            "path": "Vía"
+        },
+        "paths": {
+            "8001": "Destrucción (Masculino)",
+            "8002": "Destrucción (Femenino)",
+            "8003": "Conservación (Masculino)",
+            "8004": "Conservación (Femenino)",
+            "8005": "Armonía (Masculino)",
+            "8006": "Armonía (Femenino)",
+            "8007": "Reminiscencia (Masculino)",
+            "8008": "Reminiscencia (Femenino)"
         },
         "controls": {
             "title": "Controles de Cuenta",
@@ -132,7 +151,8 @@
                 "characterTalent": "Talento de Personaje",
                 "mission": "Misión",
                 "tutorial": "Tutorial",
-                "rogue": "Simulacro"
+                "rogue": "Simulacro",
+                "promotionRewards": "Recompensas de Ascenso"
             }
         },
         "messages": {
@@ -142,6 +162,8 @@
             "levelError": "Error al actualizar el nivel",
             "genderSuccess": "Género actualizado con éxito",
             "genderError": "Error al actualizar el género",
+            "pathSuccess": "Vía cambiada con éxito",
+            "pathError": "Error al cambiar de Vía",
             "actionError": "Error en la acción",
             "unlockSuccess": {
                 "characters": "Todos los personajes desbloqueados",
@@ -153,7 +175,8 @@
                 "characterTalent": "Todos los personajes establecidos al talento máximo",
                 "mission": "Todas las misiones desbloqueadas",
                 "tutorial": "Todos los tutoriales desbloqueados",
-                "rogue": "Todas las misiones de Simulacro desbloqueadas"
+                "rogue": "Todas las misiones de Simulacro desbloqueadas",
+                "promotionRewards": "Todas las recompensas de ascenso reclamadas"
             }
         }
     },
@@ -162,7 +185,8 @@
         "input": "Comando",
         "placeholder": "Ingresa un comando",
         "run": "Ejecutar",
-        "output": "[Resultado del Comando]"
+        "output": "[Resultado del Comando]",
+        "recent": "Comandos Recientes"
     },
     "inventory": {
         "actions": {
@@ -210,7 +234,9 @@
             "showUnnamedMissions": "Mostrar misiones sin nombre",
             "searchPlaceholder": "Buscar misiones...",
             "main": "principal",
-            "sub": "secundario"
+            "sub": "secundario",
+            "stuck": "Esta tarea podría estar atascada",
+            "autoRefresh": "Auto Actualizar"
         }
     },
     "navigation": {
@@ -228,18 +254,37 @@
     "scene": {
         "sections": {
             "propsNearMe": "Objetos cercanos",
-            "recentChanges": "Cambios recientes"
+            "recentChanges": "Cambios recientes",
+            "navigation": "Navegación",
+            "lineup": "Alineación"
         },
         "labels": {
             "state": "Estado",
-            "showUnlockedProps": "Mostrar objetos desbloqueados"
+            "showUnlockedProps": "Mostrar objetos desbloqueados",
+            "distance": "Distancia",
+            "mp": "Puntos de Técnica",
+            "autoRefresh": "Actualización Automática"
+        },
+        "actions": {
+            "forward": "Avanzar",
+            "unstuck": "Desatascar",
+            "setMp": "Establecer PT",
+            "heal": "Curar Alineación"
         },
         "messages": {
             "saveSuccess": "Estado del objeto guardado con éxito",
             "saveError": "Error al guardar el estado del objeto",
             "undoSuccess": "Estado del objeto restaurado con éxito",
             "undoError": "Error al restaurar el estado del objeto",
-            "noStateSelected": "Por favor, selecciona un estado para guardar"
+            "noStateSelected": "Por favor, selecciona un estado para guardar",
+            "forwardSuccess": "Avanzado con éxito",
+            "forwardError": "Error al avanzar",
+            "unstuckSuccess": "Comando de desatascar enviado",
+            "unstuckError": "Error al enviar comando de desatascar",
+            "setMpSuccess": "PT establecidos con éxito",
+            "setMpError": "Error al establecer PT",
+            "healSuccess": "Alineación curada con éxito",
+            "healError": "Error al curar alineación"
         }
     },
     "welcome": {

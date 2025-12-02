@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import EditIcon from '@mui/icons-material/Edit';
+import CloseIcon from '@mui/icons-material/Close';
 import RecommendIcon from '@mui/icons-material/Recommend';
 import { Character, Relic, MAIN_AFFIXES, SUB_AFFIXES, RELIC_NAMES } from '../../api/CharacterInfo';
 import CommandService from '../../api/CommandService';
@@ -336,6 +337,7 @@ export default function RelicsSection({ characterId, characterInfo, onUpdate }: 
 
     const handleRecommend = async () => {
         try {
+            setIsEditing(true);
             const recommendedRelics = await CommandService.getCharacterRelicRecommend(characterId);
             setRelics(recommendedRelics);
             showSnackbar(t('character.relic.messages.recommendSuccess'), 'success');
@@ -350,27 +352,26 @@ export default function RelicsSection({ characterId, characterInfo, onUpdate }: 
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                 <Typography variant="h6">{t('character.relic.title')}</Typography>
                 <IconButton size="small" onClick={() => setIsEditing(!isEditing)} sx={{ ml: 1 }}>
-                    <EditIcon />
+                    {isEditing ? <CloseIcon /> : <EditIcon />}
                 </IconButton>
-                {isEditing ? (
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        startIcon={<RecommendIcon />}
-                        onClick={handleRecommend}
-                        sx={{ ml: 1 }}
-                    >
-                        {t('character.relic.actions.recommend')}
-                    </Button>
-                ) : (
-                        <Box sx={{ ml: 1, display: 'flex', alignItems: 'center' }}>
-                            <RecommendIcon color="disabled" fontSize="small" />
-                            <Typography variant="body2" sx={{ ml: 0.5 }}>
-                                {t('character.relic.hints.recommendEdit')}
-                            </Typography>
-                        </Box>
-                )}
+                <Button
+                    variant="contained"
+                    color="primary"
+                    startIcon={<RecommendIcon />}
+                    onClick={handleRecommend}
+                    sx={{ ml: 1 }}
+                >
+                    {t('character.relic.actions.recommend')}
+                </Button>
             </Box>
+
+            {isEditing && (
+                <Box sx={{ mb: 2 }}>
+                    <Button variant="contained" onClick={handleSave} fullWidth>
+                        {t('character.relic.actions.saveAll')}
+                    </Button>
+                </Box>
+            )}
 
             <Grid container spacing={2}>
                 {Array.from([1, 2, 3, 4, 5, 6], (i) => (
@@ -386,14 +387,6 @@ export default function RelicsSection({ characterId, characterInfo, onUpdate }: 
                     </Grid>
                 ))}
             </Grid>
-
-            {isEditing && (
-                <Box sx={{ mt: 2 }}>
-                    <Button variant="contained" onClick={handleSave} fullWidth>
-                        {t('character.relic.actions.saveAll')}
-                    </Button>
-                </Box>
-            )}
         </Box>
     );
 }

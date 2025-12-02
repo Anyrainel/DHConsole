@@ -29,8 +29,16 @@
             "name": "名称",
             "level": "等级",
             "superimposition": "叠影",
+            "actions": {
+                "recommend": "获取推荐光锥"
+            },
+            "noLightCone": "无光锥",
             "errors": {
-                "saveFailed": "保存光锥信息失败"
+                "saveFailed": "保存光锥信息失败",
+                "recommendFailed": "无法找到推荐的光锥"
+            },
+            "messages": {
+                "recommendSuccess": "推荐光锥已应用"
             }
         },
         "relic": {
@@ -115,7 +123,18 @@
             "gender": "性别",
             "update": "更新",
             "male": "男",
-            "female": "女"
+            "female": "女",
+            "path": "命途"
+        },
+        "paths": {
+            "8001": "毁灭（男）",
+            "8002": "毁灭（女）",
+            "8003": "存护（男）",
+            "8004": "存护（女）",
+            "8005": "同谐（男）",
+            "8006": "同谐（女）",
+            "8007": "记忆（男）",
+            "8008": "记忆（女）"
         },
         "controls": {
             "title": "账号控制",
@@ -132,7 +151,8 @@
                 "characterTalent": "行迹",
                 "mission": "任务",
                 "tutorial": "教程",
-                "rogue": "模拟宇宙"
+                "rogue": "模拟宇宙",
+                "promotionRewards": "角色晋升奖励"
             }
         },
         "messages": {
@@ -142,6 +162,8 @@
             "levelError": "等级更新失败",
             "genderSuccess": "性别更新成功",
             "genderError": "性别更新失败",
+            "pathSuccess": "命途切换成功",
+            "pathError": "命途切换失败",
             "actionError": "操作失败",
             "unlockSuccess": {
                 "characters": "已解锁所有角色",
@@ -153,7 +175,8 @@
                 "characterTalent": "所有角色已设置为最高行迹",
                 "mission": "所有任务已解锁",
                 "tutorial": "所有教程已解锁",
-                "rogue": "所有模拟宇宙已解锁"
+                "rogue": "所有模拟宇宙已解锁",
+                "promotionRewards": "已领取所有角色晋升奖励"
             }
         }
     },
@@ -162,7 +185,8 @@
         "input": "命令输入",
         "placeholder": "输入命令",
         "run": "运行",
-        "output": "[命令输出]"
+        "output": "[命令输出]",
+        "recent": "最近使用的命令"
     },
     "inventory": {
         "actions": {
@@ -210,7 +234,32 @@
             "showUnnamedMissions": "显示未命名任务",
             "searchPlaceholder": "搜索任务...",
             "main": "主任务",
-            "sub": "子任务"
+            "sub": "子任务",
+            "stuck": "此任务可能卡住",
+            "autoRefresh": "自动刷新"
+        }
+    },
+    "gamemodes": {
+        "actions": {
+            "set": "设置",
+            "add": "添加"
+        },
+        "rogue": {
+            "title": "模拟宇宙",
+            "money": "宇宙碎片",
+            "buff": "祝福 ID",
+            "miracle": "奇物 ID",
+            "roll": "重置祝福",
+            "enhance": "强化祝福"
+        },
+        "grid": {
+            "title": "以太战线",
+            "gold": "以太币",
+            "roleId": "角色 ID",
+            "roleTier": "阶级",
+            "equip": "装备 ID",
+            "orb": "核心 ID",
+            "consumable": "消耗品 ID"
         }
     },
     "navigation": {
@@ -219,6 +268,7 @@
         "segments": {
             "characters": "角色",
             "missions": "任务",
+            "gamemodes": "玩法",
             "inventory": "背包",
             "scene": "场景",
             "account": "账号",
@@ -228,18 +278,37 @@
     "scene": {
         "sections": {
             "propsNearMe": "附近的道具",
-            "recentChanges": "最近的更改"
+            "recentChanges": "最近的更改",
+            "navigation": "导航",
+            "lineup": "编队"
         },
         "labels": {
             "state": "状态",
-            "showUnlockedProps": "显示已解锁的道具"
+            "showUnlockedProps": "显示已解锁的道具",
+            "distance": "距离",
+            "mp": "秘技点",
+            "autoRefresh": "自动刷新"
+        },
+        "actions": {
+            "forward": "向前移动",
+            "unstuck": "脱离卡死",
+            "setMp": "设置秘技点",
+            "heal": "治疗编队"
         },
         "messages": {
             "saveSuccess": "道具状态保存成功",
             "saveError": "保存道具状态失败",
             "undoSuccess": "道具状态恢复成功",
             "undoError": "恢复道具状态失败",
-            "noStateSelected": "请选择要保存的状态"
+            "noStateSelected": "请选择要保存的状态",
+            "forwardSuccess": "向前移动成功",
+            "forwardError": "向前移动失败",
+            "unstuckSuccess": "脱卡指令已发送",
+            "unstuckError": "脱卡指令发送失败",
+            "setMpSuccess": "秘技点设置成功",
+            "setMpError": "秘技点设置失败",
+            "healSuccess": "治疗编队成功",
+            "healError": "治疗编队失败"
         }
     },
     "welcome": {
@@ -267,7 +336,7 @@
             "title": "如果您是第一次使用",
             "step0": {
                 "title": "步骤 0：设置 DanhengServer",
-                "description": "如果您不确定如何设置 DanhengServer，请参考"
+                "description": "（已经过时）如果您不确定如何设置 DanhengServer，请参考"
             },
             "step1": {
                 "title": "步骤 1：启动所需程序",

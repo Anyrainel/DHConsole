@@ -29,8 +29,16 @@
             "name": "名稱",
             "level": "等級",
             "superimposition": "疊影",
+            "actions": {
+                "recommend": "獲取推薦光錐"
+            },
+            "noLightCone": "無光錐",
             "errors": {
-                "saveFailed": "儲存光錐資訊失敗"
+                "saveFailed": "儲存光錐資訊失敗",
+                "recommendFailed": "無法找到推薦的光錐"
+            },
+            "messages": {
+                "recommendSuccess": "推薦光錐已應用"
             }
         },
         "relic": {
@@ -115,7 +123,18 @@
             "gender": "性別",
             "update": "更新",
             "male": "男",
-            "female": "女"
+            "female": "女",
+            "path": "命途"
+        },
+        "paths": {
+            "8001": "毀滅（男）",
+            "8002": "毀滅（女）",
+            "8003": "存護（男）",
+            "8004": "存護（女）",
+            "8005": "同諧（男）",
+            "8006": "同諧（女）",
+            "8007": "記憶（男）",
+            "8008": "記憶（女）"
         },
         "controls": {
             "title": "帳號控制",
@@ -132,7 +151,8 @@
                 "characterTalent": "角色天賦",
                 "mission": "任務",
                 "tutorial": "教程",
-                "rogue": "模擬宇宙"
+                "rogue": "模擬宇宙",
+                "promotionRewards": "角色晉升獎勵"
             }
         },
         "messages": {
@@ -142,6 +162,8 @@
             "levelError": "等級更新失敗",
             "genderSuccess": "性別更新成功",
             "genderError": "性別更新失敗",
+            "pathSuccess": "命途切換成功",
+            "pathError": "命途切換失敗",
             "actionError": "操作失敗",
             "unlockSuccess": {
                 "characters": "已解鎖所有角色",
@@ -153,7 +175,8 @@
                 "characterTalent": "所有角色已設置為最高天賦",
                 "mission": "所有任務已解鎖",
                 "tutorial": "所有教程已解鎖",
-                "rogue": "所有模擬宇宙已解鎖"
+                "rogue": "所有模擬宇宙已解鎖",
+                "promotionRewards": "已領取所有角色晉升獎勵"
             }
         }
     },
@@ -162,7 +185,8 @@
         "input": "命令輸入",
         "placeholder": "輸入命令",
         "run": "運行",
-        "output": "[命令輸出]"
+        "output": "[命令輸出]",
+        "recent": "最近使用的命令"
     },
     "inventory": {
         "actions": {
@@ -210,7 +234,9 @@
             "showUnnamedMissions": "顯示未命名任務",
             "searchPlaceholder": "搜索任務...",
             "main": "主任務",
-            "sub": "子任務"
+            "sub": "子任務",
+            "stuck": "此任務可能卡住",
+            "autoRefresh": "自動刷新"
         }
     },
     "navigation": {
@@ -228,18 +254,37 @@
     "scene": {
         "sections": {
             "propsNearMe": "附近的道具",
-            "recentChanges": "最近的更改"
+            "recentChanges": "最近的更改",
+            "navigation": "導航",
+            "lineup": "隊伍"
         },
         "labels": {
             "state": "狀態",
-            "showUnlockedProps": "顯示已解鎖的道具"
+            "showUnlockedProps": "顯示已解鎖的道具",
+            "distance": "距離",
+            "mp": "秘技點",
+            "autoRefresh": "自動刷新"
+        },
+        "actions": {
+            "forward": "向前移動",
+            "unstuck": "脫離卡死",
+            "setMp": "設置秘技點",
+            "heal": "治療隊伍"
         },
         "messages": {
             "saveSuccess": "道具狀態保存成功",
             "saveError": "保存道具狀態失敗",
             "undoSuccess": "道具狀態恢復成功",
             "undoError": "恢復道具狀態失敗",
-            "noStateSelected": "請選擇要保存的狀態"
+            "noStateSelected": "請選擇要保存的狀態",
+            "forwardSuccess": "向前移動成功",
+            "forwardError": "向前移動失敗",
+            "unstuckSuccess": "脫離卡死指令已發送",
+            "unstuckError": "脫離卡死指令發送失敗",
+            "setMpSuccess": "秘技點設置成功",
+            "setMpError": "秘技點設置失敗",
+            "healSuccess": "治療隊伍成功",
+            "healError": "治療隊伍失敗"
         }
     },
     "welcome": {

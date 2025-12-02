@@ -29,8 +29,16 @@
             "name": "Tên",
             "level": "Cấp độ",
             "superimposition": "Chồng lớp",
+            "actions": {
+                "recommend": "Get Recommended Light Cone"
+            },
+            "noLightCone": "No Light Cone",
             "errors": {
-                "saveFailed": "Không thể lưu thông tin Nón Ánh Sáng"
+                "saveFailed": "Không thể lưu thông tin Nón Ánh Sáng",
+                "recommendFailed": "Failed to find recommended Light Cone"
+            },
+            "messages": {
+                "recommendSuccess": "Recommended Light Cone applied"
             }
         },
         "relic": {
@@ -115,7 +123,18 @@
             "gender": "Giới tính",
             "update": "Cập nhật",
             "male": "Nam",
-            "female": "Nữ"
+            "female": "Nữ",
+            "path": "Vận Mệnh"
+        },
+        "paths": {
+            "8001": "Hủy Diệt (Nam)",
+            "8002": "Hủy Diệt (Nữ)",
+            "8003": "Bảo Hộ (Nam)",
+            "8004": "Bảo Hộ (Nữ)",
+            "8005": "Hòa Hợp (Nam)",
+            "8006": "Hòa Hợp (Nữ)",
+            "8007": "Ký Ức (Nam)",
+            "8008": "Ký Ức (Nữ)"
         },
         "controls": {
             "title": "Điều khiển tài khoản",
@@ -132,7 +151,8 @@
                 "characterTalent": "Kỹ năng nhân vật",
                 "mission": "Nhiệm vụ",
                 "tutorial": "Hướng dẫn",
-                "rogue": "Nhiệm vụ Mô phỏng"
+                "rogue": "Nhiệm vụ Mô phỏng",
+                "promotionRewards": "Phần thưởng thăng cấp"
             }
         },
         "messages": {
@@ -142,6 +162,8 @@
             "levelError": "Cập nhật cấp độ thất bại",
             "genderSuccess": "Cập nhật giới tính thành công",
             "genderError": "Cập nhật giới tính thất bại",
+            "pathSuccess": "Đã chuyển đổi Vận Mệnh thành công",
+            "pathError": "Chuyển đổi Vận Mệnh thất bại",
             "actionError": "Thao tác thất bại",
             "unlockSuccess": {
                 "characters": "Tất cả nhân vật đã được mở khóa",
@@ -153,7 +175,8 @@
                 "characterTalent": "Tất cả nhân vật đã được đặt ở kỹ năng tối đa",
                 "mission": "Tất cả nhiệm vụ đã được mở khóa",
                 "tutorial": "Tất cả hướng dẫn đã được mở khóa",
-                "rogue": "Tất cả nhiệm vụ Mô phỏng đã được mở khóa"
+                "rogue": "Tất cả nhiệm vụ Mô phỏng đã được mở khóa",
+                "promotionRewards": "Đã nhận tất cả phần thưởng thăng cấp"
             }
         }
     },
@@ -162,7 +185,8 @@
         "input": "Nhập lệnh",
         "placeholder": "Nhập lệnh",
         "run": "Chạy",
-        "output": "[Kết quả lệnh]"
+        "output": "[Kết quả lệnh]",
+        "recent": "Lệnh gần đây"
     },
     "inventory": {
         "actions": {
@@ -210,7 +234,9 @@
             "showUnnamedMissions": "Hiển thị nhiệm vụ không tên",
             "searchPlaceholder": "Tìm kiếm nhiệm vụ...",
             "main": "chính",
-            "sub": "phụ"
+            "sub": "phụ",
+            "stuck": "Nhiệm vụ này có thể bị kẹt",
+            "autoRefresh": "Tự động làm mới"
         }
     },
     "navigation": {
@@ -228,18 +254,37 @@
     "scene": {
         "sections": {
             "propsNearMe": "Vật thể gần đây",
-            "recentChanges": "Thay đổi gần đây"
+            "recentChanges": "Thay đổi gần đây",
+            "navigation": "Điều hướng",
+            "lineup": "Đội hình"
         },
         "labels": {
             "state": "Trạng thái",
-            "showUnlockedProps": "Hiển thị vật thể đã mở khóa"
+            "showUnlockedProps": "Hiển thị vật thể đã mở khóa",
+            "distance": "Khoảng cách",
+            "mp": "Điểm kỹ thuật",
+            "autoRefresh": "Làm mới tự động"
+        },
+        "actions": {
+            "forward": "Tiến lên",
+            "unstuck": "Thoát kẹt",
+            "setMp": "Đặt TP",
+            "heal": "Hồi phục đội hình"
         },
         "messages": {
             "saveSuccess": "Đã lưu trạng thái vật thể thành công",
             "saveError": "Không thể lưu trạng thái vật thể",
             "undoSuccess": "Đã khôi phục trạng thái vật thể thành công",
             "undoError": "Không thể khôi phục trạng thái vật thể",
-            "noStateSelected": "Vui lòng chọn trạng thái để lưu"
+            "noStateSelected": "Vui lòng chọn trạng thái để lưu",
+            "forwardSuccess": "Tiến lên thành công",
+            "forwardError": "Tiến lên thất bại",
+            "unstuckSuccess": "Đã gửi lệnh thoát kẹt",
+            "unstuckError": "Gửi lệnh thoát kẹt thất bại",
+            "setMpSuccess": "Đã đặt TP thành công",
+            "setMpError": "Đặt TP thất bại",
+            "healSuccess": "Đã hồi phục đội hình thành công",
+            "healError": "Hồi phục đội hình thất bại"
         }
     },
     "welcome": {

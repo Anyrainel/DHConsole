@@ -153,6 +153,13 @@ const ServerToolbarActions = () => {
   };
 
   useEffect(() => {
+    const adminKey = localStorage.getItem(ADMIN_KEY_STORAGE_KEY);
+    if (adminKey && !isConnected) {
+      handleUseRecent();
+    }
+  }, []);
+
+  useEffect(() => {
     let interval: number;
 
     if (isConnected) {

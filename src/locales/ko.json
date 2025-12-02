@@ -29,8 +29,16 @@
             "name": "이름",
             "level": "레벨",
             "superimposition": "중첩",
+            "actions": {
+                "recommend": "Get Recommended Light Cone"
+            },
+            "noLightCone": "No Light Cone",
             "errors": {
-                "saveFailed": "광추 정보 저장에 실패했습니다"
+                "saveFailed": "광추 정보 저장에 실패했습니다",
+                "recommendFailed": "Failed to find recommended Light Cone"
+            },
+            "messages": {
+                "recommendSuccess": "Recommended Light Cone applied"
             }
         },
         "relic": {
@@ -111,7 +119,18 @@
             "gender": "성별",
             "update": "업데이트",
             "male": "남성",
-            "female": "여성"
+            "female": "여성",
+            "path": "운명"
+        },
+        "paths": {
+            "8001": "파멸(남)",
+            "8002": "파멸(여)",
+            "8003": "보존(남)",
+            "8004": "보존(여)",
+            "8005": "화합(남)",
+            "8006": "화합(여)",
+            "8007": "기억(남)",
+            "8008": "기억(여)"
         },
         "controls": {
             "title": "계정 제어",
@@ -128,7 +147,8 @@
                 "characterTalent": "캐릭터 특성",
                 "mission": "임무",
                 "tutorial": "튜토리얼",
-                "rogue": "시뮬레이션 유니버스"
+                "rogue": "시뮬레이션 유니버스",
+                "promotionRewards": "승급 보상"
             }
         },
         "messages": {
@@ -138,6 +158,8 @@
             "levelError": "레벨 업데이트 실패",
             "genderSuccess": "성별이 성공적으로 업데이트되었습니다",
             "genderError": "성별 업데이트 실패",
+            "pathSuccess": "운명 전환 성공",
+            "pathError": "운명 전환 실패",
             "actionError": "작업 실패",
             "unlockSuccess": {
                 "characters": "모든 캐릭터가 잠금 해제되었습니다",
@@ -149,7 +171,8 @@
                 "characterTalent": "모든 캐릭터가 최대 특성으로 설정되었습니다",
                 "mission": "모든 임무가 잠금 해제되었습니다",
                 "tutorial": "모든 튜토리얼이 잠금 해제되었습니다",
-                "rogue": "모든 시뮬레이션 유니버스 임무가 잠금 해제되었습니다"
+                "rogue": "모든 시뮬레이션 유니버스 임무가 잠금 해제되었습니다",
+                "promotionRewards": "모든 승급 보상을 획득했습니다"
             }
         }
     },
@@ -158,7 +181,8 @@
         "input": "명령어 입력",
         "placeholder": "명령어 입력",
         "run": "실행",
-        "output": "[명령어 출력]"
+        "output": "[명령어 출력]",
+        "recent": "최근 명령어"
     },
     "inventory": {
         "actions": {
@@ -206,7 +230,9 @@
             "showUnnamedMissions": "이름 없는 임무 표시",
             "searchPlaceholder": "임무 검색...",
             "main": "메인",
-            "sub": "서브"
+            "sub": "서브",
+            "stuck": "이 작업이 멈췄을 수 있습니다",
+            "autoRefresh": "자동 새로고침"
         }
     },
     "navigation": {
@@ -224,18 +250,37 @@
     "scene": {
         "sections": {
             "propsNearMe": "근처의 프롭",
-            "recentChanges": "최근 변경사항"
+            "recentChanges": "최근 변경사항",
+            "navigation": "내비게이션",
+            "lineup": "라인업"
         },
         "labels": {
             "state": "상태",
-            "showUnlockedProps": "잠금 해제된 프롭 표시"
+            "showUnlockedProps": "잠금 해제된 프롭 표시",
+            "distance": "거리",
+            "mp": "비술 포인트",
+            "autoRefresh": "자동 새로고침"
+        },
+        "actions": {
+            "forward": "전진",
+            "unstuck": "끼임 탈출",
+            "setMp": "비술 포인트 설정",
+            "heal": "라인업 회복"
         },
         "messages": {
             "saveSuccess": "프롭 상태가 저장되었습니다",
             "saveError": "프롭 상태 저장에 실패했습니다",
             "undoSuccess": "프롭 상태가 복원되었습니다",
             "undoError": "프롭 상태 복원에 실패했습니다",
-            "noStateSelected": "저장할 상태를 선택해주세요"
+            "noStateSelected": "저장할 상태를 선택해주세요",
+            "forwardSuccess": "전진 성공",
+            "forwardError": "전진 실패",
+            "unstuckSuccess": "끼임 탈출 명령 전송됨",
+            "unstuckError": "끼임 탈출 명령 전송 실패",
+            "setMpSuccess": "비술 포인트 설정 성공",
+            "setMpError": "비술 포인트 설정 실패",
+            "healSuccess": "라인업 회복 성공",
+            "healError": "라인업 회복 실패"
         }
     },
     "welcome": {

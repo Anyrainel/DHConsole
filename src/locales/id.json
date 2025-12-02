@@ -29,8 +29,16 @@
             "name": "Nama",
             "level": "Level",
             "superimposition": "Superimposisi",
+            "actions": {
+                "recommend": "Get Recommended Light Cone"
+            },
+            "noLightCone": "No Light Cone",
             "errors": {
-                "saveFailed": "Gagal menyimpan info Kerucut Cahaya"
+                "saveFailed": "Gagal menyimpan info Kerucut Cahaya",
+                "recommendFailed": "Failed to find recommended Light Cone"
+            },
+            "messages": {
+                "recommendSuccess": "Recommended Light Cone applied"
             }
         },
         "relic": {
@@ -115,7 +123,18 @@
             "gender": "Jenis Kelamin",
             "update": "Perbarui",
             "male": "Pria",
-            "female": "Wanita"
+            "female": "Wanita",
+            "path": "Jalur"
+        },
+        "paths": {
+            "8001": "Destruction (Pria)",
+            "8002": "Destruction (Wanita)",
+            "8003": "Preservation (Pria)",
+            "8004": "Preservation (Wanita)",
+            "8005": "Harmony (Pria)",
+            "8006": "Harmony (Wanita)",
+            "8007": "Remembrance (Pria)",
+            "8008": "Remembrance (Wanita)"
         },
         "controls": {
             "title": "Kontrol Akun",
@@ -132,7 +151,8 @@
                 "characterTalent": "Bakat Karakter",
                 "mission": "Misi",
                 "tutorial": "Tutorial",
-                "rogue": "Misi Simulasi"
+                "rogue": "Misi Simulasi",
+                "promotionRewards": "Hadiah Promosi"
             }
         },
         "messages": {
@@ -142,6 +162,8 @@
             "levelError": "Gagal memperbarui level",
             "genderSuccess": "Jenis kelamin berhasil diperbarui",
             "genderError": "Gagal memperbarui jenis kelamin",
+            "pathSuccess": "Jalur berhasil dialihkan",
+            "pathError": "Gagal beralih Jalur",
             "actionError": "Aksi gagal",
             "unlockSuccess": {
                 "characters": "Semua karakter dibuka",
@@ -153,7 +175,8 @@
                 "characterTalent": "Semua karakter diatur ke bakat maksimum",
                 "mission": "Semua misi dibuka",
                 "tutorial": "Semua tutorial dibuka",
-                "rogue": "Semua misi Simulasi dibuka"
+                "rogue": "Semua misi Simulasi dibuka",
+                "promotionRewards": "Semua hadiah promosi diklaim"
             }
         }
     },
@@ -162,7 +185,8 @@
         "input": "Masukan Perintah",
         "placeholder": "Masukkan perintah",
         "run": "Jalankan",
-        "output": "Hasil Perintah"
+        "output": "Hasil Perintah",
+        "recent": "Perintah Terbaru"
     },
     "inventory": {
         "actions": {
@@ -210,7 +234,9 @@
             "showUnnamedMissions": "Tampilkan misi tanpa nama",
             "searchPlaceholder": "Cari misi...",
             "main": "utama",
-            "sub": "tambahan"
+            "sub": "tambahan",
+            "stuck": "Tugas ini mungkin macet",
+            "autoRefresh": "Segarkan Otomatis"
         }
     },
     "navigation": {
@@ -228,18 +254,37 @@
     "scene": {
         "sections": {
             "propsNearMe": "Prop di Sekitar",
-            "recentChanges": "Perubahan Terbaru"
+            "recentChanges": "Perubahan Terbaru",
+            "navigation": "Navigasi",
+            "lineup": "Barisan"
         },
         "labels": {
             "state": "Status",
-            "showUnlockedProps": "Tampilkan prop yang sudah terbuka"
+            "showUnlockedProps": "Tampilkan prop yang sudah terbuka",
+            "distance": "Jarak",
+            "mp": "Poin Teknik",
+            "autoRefresh": "Penyegaran Otomatis"
+        },
+        "actions": {
+            "forward": "Maju",
+            "unstuck": "Bebaskan",
+            "setMp": "Atur PT",
+            "heal": "Pulihkan Barisan"
         },
         "messages": {
             "saveSuccess": "Status prop berhasil disimpan",
             "saveError": "Gagal menyimpan status prop",
             "undoSuccess": "Status prop berhasil dikembalikan",
             "undoError": "Gagal mengembalikan status prop",
-            "noStateSelected": "Silakan pilih status untuk disimpan"
+            "noStateSelected": "Silakan pilih status untuk disimpan",
+            "forwardSuccess": "Berhasil maju",
+            "forwardError": "Gagal maju",
+            "unstuckSuccess": "Perintah bebaskan dikirim",
+            "unstuckError": "Gagal mengirim perintah bebaskan",
+            "setMpSuccess": "PT berhasil diatur",
+            "setMpError": "Gagal mengatur PT",
+            "healSuccess": "Barisan berhasil dipulihkan",
+            "healError": "Gagal memulihkan barisan"
         }
     },
     "welcome": {

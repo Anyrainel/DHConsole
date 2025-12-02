@@ -155,12 +155,12 @@ export default function Inventory() {
         {Object.entries(items).map(([id, count]) => (
           <Grid key={id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
             <Card>
-              <CardContent sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '100%' }}>
+              <CardContent sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'stretch', height: '100%' }}>
                 <Box sx={{ flex: 1, overflow: 'break-all' }}>
                   <Typography variant="body1">{GameData.get(Number(id), language)}</Typography>
                   <Typography variant="body2" color="text.secondary">{id}</Typography>
                 </Box>
-                <Box sx={{ flex: 0.25, textAlign: 'right', borderLeft: '1px solid #e0e0e0', paddingLeft: '5px', height: '100%' }}>
+                <Box sx={{ flex: 0.25, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', borderLeft: '1px solid #e0e0e0', paddingLeft: '5px' }}>
                   <Typography variant="body1">x{count}</Typography>
                 </Box>
               </CardContent>

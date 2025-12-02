@@ -10,65 +10,145 @@ enum GameEntity {
 class GameData {
   static entities: Record<string, Record<GameEntity, Record<number, string>>> = {}; // Map of Language to EntityType to ID to name
   static entityTypes: Record<number, GameEntity> = {}; // Map of ID to entity type
-  static loadedEntities: Set<[GameEntity, string]> = new Set();
+  static loadedEntities: Set<string> = new Set();
+  static loadingPromises: Map<string, Promise<void>> = new Map();
   static relicTypes: Record<number, number[]> = {};
 
+  private static getKey(entity: GameEntity, language: string): string {
+    return `${entity}:${language}`;
+  }
+
   public static async loadCharacter(language: string): Promise<void> {
-    if (this.loadedEntities.has([GameEntity.Avatar, language])) {
+    const key = this.getKey(GameEntity.Avatar, language);
+    if (this.loadedEntities.has(key)) {
       return;
     }
-    const parsed = await CommandService.loadAvatarGameText(language);
-    this.storeData(parsed, GameEntity.Avatar, language);
+    if (this.loadingPromises.has(key)) {
+      return this.loadingPromises.get(key);
+    }
+
+    const promise = (async () => {
+      try {
+        const parsed = await CommandService.loadAvatarGameText(language);
+        this.storeData(parsed, GameEntity.Avatar, language);
+      } finally {
+        this.loadingPromises.delete(key);
+      }
+    })();
+
+    this.loadingPromises.set(key, promise);
+    return promise;
   }
 
   public static async loadItem(language: string): Promise<void> {
-    if (this.loadedEntities.has([GameEntity.Item, language])) {
+    const key = this.getKey(GameEntity.Item, language);
+    if (this.loadedEntities.has(key)) {
       return;
     }
-    const parsed = await CommandService.loadItemGameText(language);
-    this.storeData(parsed, GameEntity.Item, language);
+    if (this.loadingPromises.has(key)) {
+      return this.loadingPromises.get(key);
+    }
+
+    const promise = (async () => {
+      try {
+        const parsed = await CommandService.loadItemGameText(language);
+        this.storeData(parsed, GameEntity.Item, language);
+      } finally {
+        this.loadingPromises.delete(key);
+      }
+    })();
+
+    this.loadingPromises.set(key, promise);
+    return promise;
   }
 
   public static async loadMainMission(language: string): Promise<void> {
-    if (this.loadedEntities.has([GameEntity.MainMission, language])) {
+    const key = this.getKey(GameEntity.MainMission, language);
+    if (this.loadedEntities.has(key)) {
       return;
     }
-    const parsed = await CommandService.loadMainMissionGameText(language);
-    this.storeData(parsed, GameEntity.MainMission, language);
+    if (this.loadingPromises.has(key)) {
+      return this.loadingPromises.get(key);
+    }
+
+    const promise = (async () => {
+      try {
+        const parsed = await CommandService.loadMainMissionGameText(language);
+        this.storeData(parsed, GameEntity.MainMission, language);
+      } finally {
+        this.loadingPromises.delete(key);
+      }
+    })();
+
+    this.loadingPromises.set(key, promise);
+    return promise;
   }
 
   public static async loadSubMission(language: string): Promise<void> {
-    if (this.loadedEntities.has([GameEntity.SubMission, language])) {
+    const key = this.getKey(GameEntity.SubMission, language);
+    if (this.loadedEntities.has(key)) {
       return;
     }
-    const parsed = await CommandService.loadSubMissionGameText(language);
-    this.storeData(parsed, GameEntity.SubMission, language);
+    if (this.loadingPromises.has(key)) {
+      return this.loadingPromises.get(key);
+    }
+
+    const promise = (async () => {
+      try {
+        const parsed = await CommandService.loadSubMissionGameText(language);
+        this.storeData(parsed, GameEntity.SubMission, language);
+      } finally {
+        this.loadingPromises.delete(key);
+      }
+    })();
+
+    this.loadingPromises.set(key, promise);
+    return promise;
   }
 
   public static async loadRelicTypes(): Promise<void> {
-    const parsed = await CommandService.loadRelicTypes();
-    for (const [key, value] of Object.entries(parsed)) {
-      if (!this.relicTypes[value]) {
-        this.relicTypes[value] = [];
-      }
-      this.relicTypes[value].push(parseInt(key, 10));
+    const key = "RelicTypes";
+    if (Object.keys(this.relicTypes).length > 0) {
+      return;
     }
+    if (this.loadingPromises.has(key)) {
+      return this.loadingPromises.get(key);
+    }
+
+    const promise = (async () => {
+      try {
+        const parsed = await CommandService.loadRelicTypes();
+        for (const [key, value] of Object.entries(parsed)) {
+          if (!this.relicTypes[value]) {
+            this.relicTypes[value] = [];
+          }
+          this.relicTypes[value].push(parseInt(key, 10));
+        }
+      } finally {
+        this.loadingPromises.delete(key);
+      }
+    })();
+
+    this.loadingPromises.set(key, promise);
+    return promise;
   }
 
   private static storeData(data: Record<number, string>, entity: GameEntity, language: string): void {
     for (const [key, value] of Object.entries(data)) {
       GameData.set(parseInt(key, 10), value.replace(/<\/?unbreak>/g, ''), entity, language);
     }
-    this.loadedEntities.add([entity, language]);
+    this.loadedEntities.add(this.getKey(entity, language));
     console.log('Loaded', Object.keys(data).length, 'entities for', entity, 'in', language);
   }
 
   public static get(key: number, language: string): string {
+    const isLoading = Array.from(this.loadingPromises.keys()).some(k => k.endsWith(`:${language}`));
+
     if (!this.entities[language]) {
-      return "ERROR_NOT_LOADED";
+      return isLoading ? "LOADING" : "ERROR_NOT_LOADED";
     }
     if (!this.entityTypes[key] || !this.entities[language][this.entityTypes[key]]) {
-      return "ERROR_NOT_FOUND";
+      return isLoading ? "LOADING" : "ERROR_NOT_FOUND";
     }
     return this.entities[language][this.entityTypes[key]][key];
   }

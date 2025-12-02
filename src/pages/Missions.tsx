@@ -1,6 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, Button, Chip, List, ListItem, ListItemText, Divider, TextField, IconButton, ListItemButton, ListItemIcon, ListItemSecondaryAction, Switch } from '@mui/material';
-import { Search as SearchIcon, Refresh as RefreshIcon, Assignment as AssignmentIcon } from '@mui/icons-material';
+import {
+  Box,
+  Typography,
+  Button,
+  Chip,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
+  TextField,
+  IconButton,
+  ListItemButton,
+  ListItemIcon,
+  ListItemSecondaryAction,
+  Switch,
+  Tooltip,
+  FormControlLabel,
+} from '@mui/material';
+import {
+  Search as SearchIcon,
+  Refresh as RefreshIcon,
+  Assignment as AssignmentIcon,
+  Warning as WarningIcon,
+} from '@mui/icons-material';
 import CommandService from '../api/CommandService';
 import GameData from '../store/gameData';
 import { useLanguageContext } from '../store/languageContext';
@@ -18,6 +40,7 @@ const missionCategories = [
 const Missions = () => {
   const { t } = useTranslation();
   const [currentMissions, setCurrentMissions] = useState<Record<number, number[]>>({});
+  const [stuckSubMissions, setStuckSubMissions] = useState<number[]>([]);
   const [completedMainMissions, setCompletedMainMissions] = useState<number[]>([]);
   const [completedSubMissions, setCompletedSubMissions] = useState<number[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -26,6 +49,7 @@ const Missions = () => {
   const [loading, setLoading] = useState(false);
   const [waiting, setWaiting] = useState(false);
   const [showUnnamedMissions, setShowUnnamedMissions] = useState(false);
+  const [autoRefresh, setAutoRefresh] = useState(false);
   const { language } = useLanguageContext();
   const { playerUid, isConnected } = usePlayerContext();
 
@@ -48,8 +72,9 @@ const Missions = () => {
     if (!isConnected) {
       return;
     }
-    const missions = await CommandService.getCurrentMissions();
+    const { missions, stuckSubMissionIds } = await CommandService.getCurrentMissions();
     setCurrentMissions(missions);
+    setStuckSubMissions(stuckSubMissionIds);
     const mainMissionIds = Object.keys(missions).map(Number);
     setCompletedMainMissions((prev) => prev.filter(id => !mainMissionIds.includes(id)));
     const subMissionIds = Object.values(missions).flat();
@@ -59,6 +84,18 @@ const Missions = () => {
   useEffect(() => {
     fetchMissions();
   }, [playerUid, isConnected]);
+
+  useEffect(() => {
+    let intervalId: number | null = null;
+    if (autoRefresh && isConnected) {
+      intervalId = setInterval(() => {
+        fetchMissions();
+      }, 10000);
+    }
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [autoRefresh, isConnected]);
 
   const handleSkipSubMission = (subMissionId: number) => {
     setWaiting(true);
@@ -122,11 +159,17 @@ const Missions = () => {
   return (
     <Box display="flex" height="100%">
       <Box flex={1} paddingRight={2} borderRight="1px solid #ccc">
-        <Box display="flex" alignItems="center">
-          <Typography variant="h6">{t('missions.sections.currentMissions')}</Typography>
-          <IconButton color="primary" onClick={fetchMissions} style={{ marginLeft: 2 }} disabled={waiting}>
-            <RefreshIcon />
-          </IconButton>
+        <Box display="flex" alignItems="center" justifyContent="space-between" mb={1}>
+          <Box display="flex" alignItems="center">
+            <Typography variant="h6">{t('missions.sections.currentMissions')}</Typography>
+            <IconButton color="primary" onClick={fetchMissions} style={{ marginLeft: 2 }} disabled={waiting}>
+              <RefreshIcon />
+            </IconButton>
+          </Box>
+          <FormControlLabel
+            control={<Switch checked={autoRefresh} onChange={(e) => setAutoRefresh(e.target.checked)} size="small" />}
+            label={t('missions.labels.autoRefresh')}
+          />
         </Box>
         <Box display="flex" flexWrap="wrap">
           {missionCategories.map((category) => (
@@ -152,39 +195,54 @@ const Missions = () => {
         <List dense={true}>
           {filteredMissions.map(([mainMissionId, subMissions]) => (
             <React.Fragment key={mainMissionId}>
-              <ListItem secondaryAction={
+              <ListItem>
+                <ListItemText
+                  primary={`${GameData.get(Number(mainMissionId), language)}`}
+                  secondary={`${mainMissionId} (${t('missions.labels.main')})`}
+                  slotProps={{ primary: { variant: 'body1' } }}
+                  sx={{ mr: 2 }}
+                />
                 <Button
                   variant="contained"
                   color="secondary"
                   onClick={() => handleSkipMainMission(Number(mainMissionId))}
                   disabled={waiting}
-                  sx={{ textTransform: 'none' }}>
+                  sx={{ textTransform: 'none', ml: 2, flexShrink: 0 }}>
                   {t('missions.actions.skipAll')}
                 </Button>
-              } >
-                <ListItemText
-                  primary={`${GameData.get(Number(mainMissionId), language)}`}
-                  secondary={`${mainMissionId} (${t('missions.labels.main')})`}
-                  slotProps={{ primary: { variant: 'body1' } }}
-                />
               </ListItem>
               {subMissions.filter(subMissionId => isNamedMission(subMissionId)).map((subMissionId) => (
-                <ListItem key={subMissionId} secondaryAction={
+                <ListItem key={subMissionId}>
+                  <ListItemText
+                    primary={
+                      <Box component="span" sx={{ wordBreak: 'break-word' }}>
+                        {`${GameData.get(Number(subMissionId), language)}`}
+                        {stuckSubMissions.includes(subMissionId) && (
+                          <Tooltip title={t('missions.labels.stuck')}>
+                            <Box component="span" sx={{ display: 'inline-flex', verticalAlign: 'middle', ml: 0.5 }}>
+                              <WarningIcon sx={{ color: '#fdd835', fontSize: '1.2rem' }} />
+                            </Box>
+                          </Tooltip>
+                        )}
+                      </Box>
+                    }
+                    secondary={`${subMissionId} (${t('missions.labels.sub')})`}
+                    slotProps={{ 
+                      primary: { 
+                        variant: 'body1',
+                        component: 'span'
+                      } 
+                    }}
+                    sx={{ marginLeft: '24px', mr: 2 }}
+                  />
                   <Button
                     variant="contained"
                     color="secondary"
                     onClick={() => handleSkipSubMission(subMissionId)}
                     disabled={waiting}
-                    sx={{ textTransform: 'none' }}>
+                    sx={{ textTransform: 'none', ml: 2, flexShrink: 0 }}>
                     {t('missions.actions.skip')}
                   </Button>
-                } >
-                  <ListItemText
-                    primary={`${GameData.get(Number(subMissionId), language)}`}
-                    secondary={`${subMissionId} (${t('missions.labels.sub')})`}
-                    slotProps={{ primary: { variant: 'body1' } }}
-                    sx={{ marginLeft: '24px' }}
-                  />
                 </ListItem>
               ))}
             </React.Fragment>
@@ -193,22 +251,28 @@ const Missions = () => {
       </Box>
 
       <Box flex={1} paddingLeft={2}>
-        <Typography variant="h6">{t('missions.sections.recentSkipHistory')}</Typography>
+        <Typography variant="h6">
+          {t("missions.sections.recentSkipHistory")}
+        </Typography>
         <List>
           {completedMainMissions.slice(-5).map((id) => (
-            <ListItem key={id} secondaryAction={
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => handleAcceptMission(Number(id))}
-                disabled={waiting}
-                sx={{ textTransform: 'none' }}>
-                {t('missions.actions.reaccept')}
-              </Button>
-            } >
+            <ListItem
+              key={id}
+              secondaryAction={
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => handleAcceptMission(Number(id))}
+                  disabled={waiting}
+                  sx={{ textTransform: "none" }}
+                >
+                  {t("missions.actions.reaccept")}
+                </Button>
+              }
+            >
               <ListItemText
                 primary={`${GameData.get(Number(id), language)}`}
-                secondary={`${id} (${t('missions.labels.main')})`}
+                secondary={`${id} (${t("missions.labels.main")})`}
               />
             </ListItem>
           ))}
@@ -218,18 +282,20 @@ const Missions = () => {
             <ListItem key={id}>
               <ListItemText
                 primary={`${GameData.get(Number(id), language)}`}
-                secondary={`${id} (${t('missions.labels.sub')})`}
+                secondary={`${id} (${t("missions.labels.sub")})`}
               />
             </ListItem>
           ))}
         </List>
-        <Divider style={{ margin: '16px 0' }} />
-        <Typography variant="h6">{t('missions.sections.acceptNewMissions')}</Typography>
+        <Divider style={{ margin: "16px 0" }} />
+        <Typography variant="h6">
+          {t("missions.sections.acceptNewMissions")}
+        </Typography>
         <Box display="flex" alignItems="center" marginBottom={2}>
           <TextField
             fullWidth
             variant="outlined"
-            placeholder={t('missions.labels.searchPlaceholder')}
+            placeholder={t("missions.labels.searchPlaceholder")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value.trim())}
           />
@@ -239,19 +305,23 @@ const Missions = () => {
         </Box>
         <List>
           {Object.entries(searchResults).map(([id, name]) => (
-            <ListItem key={id} secondaryAction={
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => handleAcceptMission(Number(id))}
-                disabled={waiting}
-                sx={{ textTransform: 'none' }}>
-                {t('missions.actions.accept')}
-              </Button>
-            } >
+            <ListItem
+              key={id}
+              secondaryAction={
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => handleAcceptMission(Number(id))}
+                  disabled={waiting}
+                  sx={{ textTransform: "none" }}
+                >
+                  {t("missions.actions.accept")}
+                </Button>
+              }
+            >
               <ListItemText
                 primary={name}
-                secondary={`${id} (${t('missions.labels.main')})`}
+                secondary={`${id} (${t("missions.labels.main")})`}
               />
             </ListItem>
           ))}

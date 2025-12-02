@@ -29,8 +29,16 @@
             "name": "Nome",
             "level": "Nível",
             "superimposition": "Sobreposição",
+            "actions": {
+                "recommend": "Get Recommended Light Cone"
+            },
+            "noLightCone": "No Light Cone",
             "errors": {
-                "saveFailed": "Falha ao salvar informações do Cone de Luz"
+                "saveFailed": "Falha ao salvar informações do Cone de Luz",
+                "recommendFailed": "Failed to find recommended Light Cone"
+            },
+            "messages": {
+                "recommendSuccess": "Recommended Light Cone applied"
             }
         },
         "relic": {
@@ -115,7 +123,18 @@
             "gender": "Gênero",
             "update": "Atualizar",
             "male": "Masculino",
-            "female": "Feminino"
+            "female": "Feminino",
+            "path": "Caminho"
+        },
+        "paths": {
+            "8001": "Destruição (Masculino)",
+            "8002": "Destruição (Feminino)",
+            "8003": "Preservação (Masculino)",
+            "8004": "Preservação (Feminino)",
+            "8005": "Harmonia (Masculino)",
+            "8006": "Harmonia (Feminino)",
+            "8007": "Recordação (Masculino)",
+            "8008": "Recordação (Feminino)"
         },
         "controls": {
             "title": "Controles da Conta",
@@ -132,7 +151,8 @@
                 "characterTalent": "Talento do Personagem",
                 "mission": "Missão",
                 "tutorial": "Tutorial",
-                "rogue": "Missão Simulação"
+                "rogue": "Missão Simulação",
+                "promotionRewards": "Recompensas de Ascensão"
             }
         },
         "messages": {
@@ -142,6 +162,8 @@
             "levelError": "Falha ao atualizar nível",
             "genderSuccess": "Gênero atualizado com sucesso",
             "genderError": "Falha ao atualizar gênero",
+            "pathSuccess": "Caminho alterado com sucesso",
+            "pathError": "Falha ao alterar Caminho",
             "actionError": "Falha na ação",
             "unlockSuccess": {
                 "characters": "Todos os personagens desbloqueados",
@@ -153,7 +175,8 @@
                 "characterTalent": "Todos os personagens definidos para o talento máximo",
                 "mission": "Todas as missões desbloqueadas",
                 "tutorial": "Todos os tutoriais desbloqueados",
-                "rogue": "Todas as missões de Simulação desbloqueadas"
+                "rogue": "Todas as missões de Simulação desbloqueadas",
+                "promotionRewards": "Todas as recompensas de ascensão reivindicadas"
             }
         }
     },
@@ -162,7 +185,8 @@
         "input": "Entrada de Comando",
         "placeholder": "Digite o comando",
         "run": "Executar",
-        "output": "[Saída do Comando]"
+        "output": "[Saída do Comando]",
+        "recent": "Comandos Recentes"
     },
     "inventory": {
         "actions": {
@@ -210,7 +234,9 @@
             "showUnnamedMissions": "Mostrar missões sem nome",
             "searchPlaceholder": "Pesquisar missões...",
             "main": "principal",
-            "sub": "sub"
+            "sub": "sub",
+            "stuck": "Esta tarefa pode estar travada",
+            "autoRefresh": "Atualização Auto"
         }
     },
     "navigation": {
@@ -228,18 +254,37 @@
     "scene": {
         "sections": {
             "propsNearMe": "Objetos próximos",
-            "recentChanges": "Mudanças recentes"
+            "recentChanges": "Mudanças recentes",
+            "navigation": "Navegação",
+            "lineup": "Formação"
         },
         "labels": {
             "state": "Estado",
-            "showUnlockedProps": "Mostrar objetos desbloqueados"
+            "showUnlockedProps": "Mostrar objetos desbloqueados",
+            "distance": "Distância",
+            "mp": "Pontos de Perícia",
+            "autoRefresh": "Atualização Automática"
+        },
+        "actions": {
+            "forward": "Avançar",
+            "unstuck": "Desprender",
+            "setMp": "Definir PP",
+            "heal": "Curar Equipe"
         },
         "messages": {
             "saveSuccess": "Estado do objeto salvo com sucesso",
             "saveError": "Falha ao salvar estado do objeto",
             "undoSuccess": "Estado do objeto restaurado com sucesso",
             "undoError": "Falha ao restaurar estado do objeto",
-            "noStateSelected": "Por favor, selecione um estado para salvar"
+            "noStateSelected": "Por favor, selecione um estado para salvar",
+            "forwardSuccess": "Avançou com sucesso",
+            "forwardError": "Falha ao avançar",
+            "unstuckSuccess": "Comando de desprender enviado",
+            "unstuckError": "Falha ao enviar comando de desprender",
+            "setMpSuccess": "PP definidos com sucesso",
+            "setMpError": "Falha ao definir PP",
+            "healSuccess": "Equipe curada com sucesso",
+            "healError": "Falha ao curar equipe"
         }
     },
     "welcome": {

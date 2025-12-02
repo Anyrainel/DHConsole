@@ -29,8 +29,16 @@
             "name": "Nom",
             "level": "Niveau",
             "superimposition": "Superposition",
+            "actions": {
+                "recommend": "Get Recommended Light Cone"
+            },
+            "noLightCone": "No Light Cone",
             "errors": {
-                "saveFailed": "Échec de la sauvegarde des informations du Cône de Lumière"
+                "saveFailed": "Échec de la sauvegarde des informations du Cône de Lumière",
+                "recommendFailed": "Failed to find recommended Light Cone"
+            },
+            "messages": {
+                "recommendSuccess": "Recommended Light Cone applied"
             }
         },
         "relic": {
@@ -115,7 +123,18 @@
             "gender": "Genre",
             "update": "Mettre à jour",
             "male": "Homme",
-            "female": "Femme"
+            "female": "Femme",
+            "path": "Voie"
+        },
+        "paths": {
+            "8001": "Destruction (Homme)",
+            "8002": "Destruction (Femme)",
+            "8003": "Préservation (Homme)",
+            "8004": "Préservation (Femme)",
+            "8005": "Harmonie (Homme)",
+            "8006": "Harmonie (Femme)",
+            "8007": "Souvenir (Homme)",
+            "8008": "Souvenir (Femme)"
         },
         "controls": {
             "title": "Contrôles du Compte",
@@ -132,7 +151,8 @@
                 "characterTalent": "Talent de Personnage",
                 "mission": "Mission",
                 "tutorial": "Tutoriel",
-                "rogue": "Mission Simulée"
+                "rogue": "Mission Simulée",
+                "promotionRewards": "Récompenses de Promotion"
             }
         },
         "messages": {
@@ -142,6 +162,8 @@
             "levelError": "Échec de la mise à jour du niveau",
             "genderSuccess": "Genre mis à jour avec succès",
             "genderError": "Échec de la mise à jour du genre",
+            "pathSuccess": "Voie changée avec succès",
+            "pathError": "Échec du changement de Voie",
             "actionError": "Échec de l'action",
             "unlockSuccess": {
                 "characters": "Tous les personnages débloqués",
@@ -153,7 +175,8 @@
                 "characterTalent": "Tous les talents de personnage sont au maximum",
                 "mission": "Toutes les missions débloquées",
                 "tutorial": "Tous les tutoriels débloqués",
-                "rogue": "Toutes les missions de Simulation débloquées"
+                "rogue": "Toutes les missions de Simulation débloquées",
+                "promotionRewards": "Toutes les récompenses de promotion réclamées"
             }
         }
     },
@@ -162,7 +185,8 @@
         "input": "Entrée de Commande",
         "placeholder": "Entrez la commande",
         "run": "Exécuter",
-        "output": "[Sortie de Commande]"
+        "output": "[Sortie de Commande]",
+        "recent": "Commandes Récentes"
     },
     "inventory": {
         "actions": {
@@ -210,7 +234,9 @@
             "showUnnamedMissions": "Afficher les missions sans nom",
             "searchPlaceholder": "Rechercher des missions...",
             "main": "principal",
-            "sub": "secondaire"
+            "sub": "secondaire",
+            "stuck": "Cette tâche pourrait être bloquée",
+            "autoRefresh": "Actualisation Auto"
         }
     },
     "navigation": {
@@ -228,18 +254,37 @@
     "scene": {
         "sections": {
             "propsNearMe": "Accessoires à proximité",
-            "recentChanges": "Changements récents"
+            "recentChanges": "Changements récents",
+            "navigation": "Navigation",
+            "lineup": "Formation"
         },
         "labels": {
             "state": "État",
-            "showUnlockedProps": "Afficher les accessoires déverrouillés"
+            "showUnlockedProps": "Afficher les accessoires déverrouillés",
+            "distance": "Distance",
+            "mp": "Points de Technique",
+            "autoRefresh": "Actualisation Automatique"
+        },
+        "actions": {
+            "forward": "Avancer",
+            "unstuck": "Se décoincer",
+            "setMp": "Définir PT",
+            "heal": "Soigner l'équipe"
         },
         "messages": {
             "saveSuccess": "État de l'accessoire sauvegardé avec succès",
             "saveError": "Échec de la sauvegarde de l'état de l'accessoire",
             "undoSuccess": "État de l'accessoire restauré avec succès",
             "undoError": "Échec de la restauration de l'état de l'accessoire",
-            "noStateSelected": "Veuillez sélectionner un état à sauvegarder"
+            "noStateSelected": "Veuillez sélectionner un état à sauvegarder",
+            "forwardSuccess": "Avancé avec succès",
+            "forwardError": "Échec de l'avance",
+            "unstuckSuccess": "Commande de déblocage envoyée",
+            "unstuckError": "Échec de l'envoi de la commande",
+            "setMpSuccess": "PT définis avec succès",
+            "setMpError": "Échec de la définition des PT",
+            "healSuccess": "Équipe soignée avec succès",
+            "healError": "Échec du soin de l'équipe"
         }
     },
     "welcome": {

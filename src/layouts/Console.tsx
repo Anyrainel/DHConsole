@@ -13,7 +13,7 @@ export default function Layout() {
     <DialogsProvider>
       <SnackbarProvider>
         <PlayerProvider>
-          <DashboardLayout slots={{ toolbarActions: ServerToolbarActions, sidebarFooter: LanguageSidebarFooter }}>
+          <DashboardLayout slots={{ toolbarActions: ServerToolbarActions, sidebarFooter: LanguageSidebarFooter }} sidebarExpandedWidth={260}>
             <PageContainer>
               <Outlet />
             </PageContainer>
