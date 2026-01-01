@@ -163,14 +163,14 @@ function RelicCard({ pos: index, relic, isEditing, onRelicChange, characterId, o
     const totalSubAffixLevels = subAffixes.reduce((sum, affix) => sum + affix.level, 0);
     const isValidTotal = totalSubAffixLevels === 8 || totalSubAffixLevels === 9;
 
-    const handleSubAffixChange = (index: number, field: 'name' | 'level', value: string | number) => {
+    const handleSubAffixChange = (subindex: number, field: 'name' | 'level', value: string | number) => {
         const newSubAffixes = [...subAffixes];
 
         if (field === 'level') {
             const numValue = Math.max(1, Math.min(Number(value), 5));
-            newSubAffixes[index] = { ...newSubAffixes[index], level: numValue };
+            newSubAffixes[subindex] = { ...newSubAffixes[subindex], level: numValue };
         } else {
-            newSubAffixes[index] = { ...newSubAffixes[index], name: value as string };
+            newSubAffixes[subindex] = { ...newSubAffixes[subindex], name: value as string };
         }
 
         setSubAffixes(newSubAffixes);
